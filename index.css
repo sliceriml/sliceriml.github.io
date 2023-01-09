@@ -2,153 +2,107 @@
 {
 	box-sizing: border-box;
 }
-img#cartLogo
+header, main, nav, #titre
 {
-	position: fixed;
-	right: 20px;
-	top: 20px;
-	width: 70px;
-	height: 70px;
-	cursor: pointer;
+	min-width: 720px;
 }
-#titrePrincipal, #titrePrincipal+h2
-{
-	/* margin-left: 20%; */
-	color: #ac873a;
-}
-h1, h2, h3
-{
-	text-align: center;
-	text-transform: uppercase;
-	font-family: "Agency FB", "Helvetica Neue", Helvetica, sans-serif;
-	/*text-decoration: underline;*/
-}
-div#imageList
-{
-	/* margin-left: 20%; */
-	/* border: solid 3px red; */
-	padding: 0px;
-	text-align: center;
-}
-.imageItem
-{
-	display: inline-block;
-	border: solid 3px #ac873a/* lightskyblue */;
-	margin: 5px;
-	padding-bottom: 5px;
-	border-radius: 10%;
-}
-.imageItem span
-{
-	display: block;
-	margin-bottom: 5px;
-}
-.imageItem > img
-{
-	height: 200px;
-	width: 200px;
-	border-radius: 20%;
-	margin: 20px;
-	/*border: double lightgrey 3px;*/
-	box-shadow: 6px 6px 15px black;
-	cursor: zoom-in;
-}
-#popupImage, #commandBox
-{
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 0%;
-	height: 0%;
-	cursor: pointer;
-	color: white;
-	text-align: center;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.85);
-	padding: 15px;
-
-	transition: width 1.5s,height 1.5s;
-}
-#popupImage img
+header
 {
 	position: absolute;
-	left: 25%;
-	top: 12%;
-	width: 50%;
-	height: 76%;
-	cursor: zoom-out;
-	/*max-height: 76%;*/
-	/*box-shadow: 6px 6px 15px lightcoral;*/
-	border: double white 5px;
-	border-radius: 0% 30%;
-}
-#popupImage h1
-{
-	position: absolute;
-	color: white;
-	width: 100%;
-	height: 100%;
 	left: 0%;
 	top: 0%;
+	width: 100%;
+	height: 30%;
+	text-align: center;
+	background-image: url("images/header.jpg");
+	background-repeat: no-repeat;
+	background-position: center 10%;
+	background-size: cover;
+	opacity: 0.5;
 }
-#panier
+#titre
 {
-	position: fixed;
-	/* background-color: #ac873a; */
-	color: white;
-	background-color: rgba(172, 135, 58, 1);
-	left: 20px;
-	top: 20px;
-	width: 20%;
-	height: fit-content;
-	/* text-align: center; */
-	border-radius: 20%;
-	box-shadow: 14px 14px 15px rgb(182, 117, 37);
+	position: absolute;
+	left: 0%;
+	padding: 0%;
+	top: 6%;
+	font-size: 300%;
+	width: 100%;
+	text-align: center;
+	/* font-family: "Poiret One"; */
+	/* text-transform: uppercase; */
+	/* font-family: "Agency FB"; */
 }
-#panier p, #panier h3, #panier li
+nav
 {
-	font-family: "Comic Sans MS";
-}
-#panier p, #panier h3
-{
+	position: absolute;
+	left: 0%;
+	top: 30%;
+	width: 100%;
+	height: 5%;
 	text-align: center;
 }
-#panier h3
+nav li, nav ul
 {
-	cursor: pointer;
-	color: yellow;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
 }
-table
+nav li a
 {
-	border-collapse: collapse;
-	background-color: white;
-	border: solid grey 2px;
-	font-family: "Comic Sans MS";
-    border-radius: 10%;
-	color: black;
-	min-width: 50%;
-	width: fit-content;
-	margin: auto;
-}
-th, td
-{
-	padding: 5px;
-	border: solid grey 1px;
-}
-th
-{
-	font-size: 1.5em;
-}
-td 
-{
+	display: inline-block;
+	position: relative;
+	margin: 0px;
+	height: 100%;
+	width: 20%;
+	padding: 0.5%;
 	font-size: 1.2em;
+	text-decoration: none;
+	color: whitesmoke;
+	/* font-family: "Poiret One"; */
+	/* font-family: "Agency FB"; */
 }
-td img
+nav li a:hover
 {
-	border-radius: 50%;
-	border: solid grey 1px;
+	text-transform: uppercase;
 }
-div.controls
+main
 {
-	text-align: right;
+	position: absolute;
+	left: 0%;
+	top: 35%;
+	width: 100%;
+	height: fit-content;/* 60%; */
+	text-align: center;
+	padding: 0px 2%;
+}
+main h1:first-child
+{
+	font-family: "Poiret One", "Agency FB";
+}
+#borderTopLeft
+{
+	position: absolute;
+	left: 1%;
+	top: 36%;
+	width: 5%;
+	height: 10%;
+	border-top: 5px solid #6a96d9;
+	border-left: 5px solid #6a96d9;
+}
+
+#borderBottomRight
+{
+	position: absolute;
+	right: 1%;
+	bottom: 1%;
+	width: 5%;
+	height: 10%;
+	border-bottom: 5px solid #6a96d9;
+	border-right: 5px solid #6a96d9;
+}
+p
+{
+	text-align: justify;
+	line-height: 1.5;
 }
