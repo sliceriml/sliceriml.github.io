@@ -7,11 +7,17 @@ window.onload = function () {
 	for (let i = 0; i < bgColors.length; i++) {
 		menuItems[i].style.backgroundColor = bgColors[i];
 		menuItems[i].onclick = function () {
-			const titre = document.querySelector('main h1:first-child');
-			titre.innerHTML = this.innerHTML;
+			// const titre = document.querySelector('main h1:first-child');
+			// titre.innerHTML = this.innerHTML;
 			borderTopLeft.style.borderColor = borderBottomRight.style.borderColor = bgColors[i];
 		}
 		// borderTopLeft.style.height = borderBottomRight.style.height = borderTopLeft.style.width;
 		// borderBottomRight.style.height = borderBottomRight.style.
 	}
+
+	// main.onload = resizeIframe;
+}
+
+function resizeIframe(iFrame) {
+	iFrame.style.height = iFrame.contentWindow.document.documentElement.scrollHeight + 'px';
 }

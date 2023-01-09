@@ -2,7 +2,7 @@
 {
 	box-sizing: border-box;
 }
-header, main, nav, #titre
+header, #main, nav, #titre
 {
 	min-width: 720px;
 }
@@ -20,7 +20,7 @@ header
 	background-size: cover;
 	opacity: 0.5;
 }
-#titre
+#header-text
 {
 	position: absolute;
 	left: 0%;
@@ -29,9 +29,11 @@ header
 	font-size: 300%;
 	width: 100%;
 	text-align: center;
+	/* text-shadow: 2px 2px 8px black; */
 	/* font-family: "Poiret One"; */
 	/* text-transform: uppercase; */
 	/* font-family: "Agency FB"; */
+	/* font-family: "Comic Sans MS"; */
 }
 nav
 {
@@ -66,18 +68,20 @@ nav li a:hover
 {
 	text-transform: uppercase;
 }
-main
+#main
 {
 	position: absolute;
 	left: 0%;
 	top: 35%;
 	width: 100%;
-	height: fit-content;/* 60%; */
+	/* height: fit-content; */
 	text-align: center;
-	padding: 0px 2%;
+	padding: 0px 50px;
+	border: none;
 }
-main h1:first-child
+#titre
 {
+	text-align: center;
 	font-family: "Poiret One", "Agency FB";
 }
 #borderTopLeft
@@ -85,19 +89,19 @@ main h1:first-child
 	position: absolute;
 	left: 1%;
 	top: 36%;
-	width: 5%;
-	height: 10%;
+	width: 80px;
+	height: 80px;
 	border-top: 5px solid #6a96d9;
 	border-left: 5px solid #6a96d9;
 }
 
 #borderBottomRight
 {
-	position: absolute;
+	position: fixed;
 	right: 1%;
 	bottom: 1%;
-	width: 5%;
-	height: 10%;
+	width: 80px;
+	height: 80px;
 	border-bottom: 5px solid #6a96d9;
 	border-right: 5px solid #6a96d9;
 }
@@ -105,4 +109,23 @@ p
 {
 	text-align: justify;
 	line-height: 1.5;
+	/* font-family: "Comic Sans MS"; */
+}
+.loader {
+	position: fixed;
+	/* top: 36%; */
+	border: 16px solid #fda843; 
+	border-top: 16px solid #6a96d9; 
+	border-right: 16px solid green;
+	border-bottom: 16px solid red;
+	border-radius: 50%;
+	/* background-color: #e1da2f; */
+	width: 100px;
+	height: 100px;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
