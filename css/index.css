@@ -1,0 +1,165 @@
+*
+{
+	box-sizing: border-box;
+}
+html
+{
+	scroll-behavior: smooth;
+}
+header, #header-image, #header-overlay
+{
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	width: 100%;
+}
+header
+{
+	height: 100%;
+	background-color: #BDC4C1;
+	background-color: #1B2738;
+	background-color: #873F3C;
+	/* border: solid crimson 2px; */
+}
+#header-image
+{
+	height: 100%;
+	background-image: url("../images/header-man-2.jpeg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center top;
+	/* background-color: rgba(0, 0, 0, 0.5); */
+	/* opacity: 0.9; */
+}
+#header-overlay
+{
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+#header-text
+{
+	position: absolute;
+	color: white;
+	width: fit-content;
+	text-transform: uppercase;
+	/* font-family: "Comic Sans MS"; */
+	/* font-family: "Poiret One"; */
+	font-family: 'Poiret One', cursive;
+	right: 8%;
+	top: 30%;
+	text-align: center;
+	text-align: right;
+	/* font-size: 5em; */
+	/* opacity: 0.5; */
+}
+#header-text span
+{
+	color: #BDC4C1;
+	display: block;
+}
+#header-text span:nth-child(1)
+{
+	font-size: 5em;
+}
+#header-text span:nth-child(2)
+{
+	font-size: 4em;
+}
+#header-text span:nth-child(3)
+{
+	font-size: 3em;
+	text-transform: lowercase;
+}
+#header-action
+{
+	position: absolute;
+	top: 70%;
+	left: 0%;
+	/* right: 40%; */
+	width: 100%;
+	text-align: center;
+}
+#header-action a
+{
+	padding: 10px 40px;
+	border-radius: 10px;
+	background-color: #873F3C;
+	color: #BDC4C1;
+	font-size: 2em;
+	font-family: 'Poiret One', cursive;
+	/* font-family: "Poiret One"; */
+	text-decoration: none;
+}
+#header-action a:hover
+{
+	opacity: 0.5;
+}
+nav
+{
+	position: fixed;
+	right: 0%;
+	top: 0%;
+	width: 100%;
+	z-index: 1000;
+	/* text-align: right; */
+}
+/* nav:hover
+{
+	background-color: #1B2738; 
+	opacity: 0.5;
+} */
+nav ul, nav li
+{
+	display: inline;
+}
+nav a
+{
+	display: inline-block;
+	color: #BDC4C1;
+	text-decoration: none;
+	padding: 10px 30px;
+	font-family: "Agency FB";
+	font-family: "Comic Sans MS";
+	font-family: "Poiret One";
+	/* text-transform: uppercase; */
+	font-size: 1.5em;
+	/* opacity: 0.8; */
+	/* border-left: solid #873F3C 5px; */
+}
+nav a:hover
+{
+	opacity: 1;
+	/* color: whitesmoke; */
+	/* text-transform: capitalize; */
+	/* border-left: solid #873F3C 5px; */
+	/* border-top: solid #873F3C 5px; */
+	border-bottom: solid #873F3C 5px;
+	/* border: solid #873F3C 5px; */
+	padding: 5px;
+	padding-bottom: 10px;
+}
+main
+{
+	position: absolute;
+	left: 0%;
+	top: 100%;
+	width: 100%;
+}
+p, main ul
+{
+	text-align: justify;
+	line-height: 2.5;
+	padding: 20px;
+	font-family: 'Raleway', sans-serif;
+
+}
+main h1:first-child
+{
+	text-align: center;
+	text-align: center;
+	/* letter-spacing: 0em; */
+	font-size: 5em;
+	/* font-family: 'Comic Sans MS', Arial, sans-serif; */
+	/* font-family: 'Raleway', sans-serif; */
+	font-family: 'Josefin Sans', sans-serif;
+}
