@@ -1,20 +1,15 @@
-const borderColors = ['#6a96d9', '#3a9d56', '#db4141', '#fda843', '#e1da2f'];
-
 window.onload = function () {
 	const main = document.querySelector('main');
 	const nav = document.querySelector('nav');
 	let currentItem = null;
-	// main.hidden = true;
 
 	document.body.onscroll = function () {
 		if (document.documentElement.scrollTop < 135) {
 			nav.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-			// nav.style.opacity = '0';
 		}
 		else
 		{
 			nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-
 		}
 	}
 
