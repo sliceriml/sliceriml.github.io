@@ -165,6 +165,11 @@ main ul
 	list-style-image: url('../images/favicon-16x16.png');
 	/* list-style-image: url('../images/arrow.png'); */
 }
+main ul.little-item
+{
+	font-size: 1em;
+	line-height: 1;
+}
 main li
 {
 	/* border: solid 2px red; */

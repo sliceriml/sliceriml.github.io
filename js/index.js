@@ -33,10 +33,32 @@ window.onload = function () {
 				main.innerHTML = xhr.responseText;
 				main.hidden = false;
 				scroller.click();
+				updateLinks(menuItems);
 			}
 			
 			xhr.open('GET', this.href);
 			xhr.send();
+		}
+	}
+
+	if (window.location.href.includes('?download')) {
+		menuItems[4].click();
+	}
+}
+
+function updateLinks(menuItems) {
+	const localLinks = document.querySelectorAll('#main a');
+	for (const link of localLinks) {
+		if (link.host == window.location.host && !link.href.endsWith('#')) {
+			for (const menuItem of menuItems) {
+				if (link.href == menuItem.href) {
+					link.onclick = function (e) {
+						e.preventDefault();
+						menuItem.click();
+					}
+					break;
+				}
+			}
 		}
 	}
 }
