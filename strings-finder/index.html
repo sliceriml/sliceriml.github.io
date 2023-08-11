@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Slicer Strings Finder</title>
+	<link rel="stylesheet" href="lookup.css">
+	<script src="lookup.js"></script>
+</head>
+<body>
+	<h1>Slicer Strings Finder</h1>
+	<form>
+		<fieldset>
+			<legend>Search options</legend>
+			<hr>
+			<label for="moduleField">Choose your language</label>
+			<select id="languageList" onchange="updateTranslationUrl()"></select>
+			<hr>
+			<label for="moduleField">Specify the module name to search in</label>
+			<select id="moduleField" onchange="onModuleFieldChanged()">
+				<option>Choose a module name</option>
+			</select>
+			<hr>
+			<label for="searchField">Search for a given string</label>
+			<input id="searchField" type="text" oninput="searchString(this.value)" placeholder="e.g. welcome">
+		</fieldset>
+	</form>
+	<table id="stringTable" class="styled-table" hidden>
+		<thead>
+			<tr>
+				<th>Weblate Translation Key</th>
+				<th>3D Slicer Module Name</th>
+				<th>String to translate</th>
+				<th>Weblate link</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+</body>
+</html>
