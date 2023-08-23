@@ -154,9 +154,9 @@ function showFoundStringsOnGui(foundMessages) {
 
 		stringListHTML += `
 			<tr>
-				<td>${contextList[message.context]}</td>
 				<td>${message.module}</td>
 				<td>${message.text}</td>
+				<td>${contextList[message.context]}</td>
 				<td>
 					<a href="${WEBLATE_SEARCH_URL}${encodeURIComponent(contextList[message.context] + ' "' + messageText + '"')}" target="_blank">Open on weblate</a>
 				</td>
