@@ -116,7 +116,7 @@ function onModuleFieldChanged() {
 function searchString() {
 	const searchField = document.getElementById('searchField');
 	const moduleField = document.getElementById('moduleField');
-	const searchedString = searchField.value;
+	const searchedString = searchField.value.toLowerCase();
 	const moduleName = moduleField.value;
 
 	const foundMessages = [];
@@ -205,4 +205,10 @@ function updateTranslationUrl() {
 window.onload = function () {
 	getLanguageList();
 	downloadTsFile();
+	
+	// Disable form submission when ENTER key is pressed
+	const form = document.querySelector('form');
+	form.onsubmit = function () {
+		return false;
+	};
 }
