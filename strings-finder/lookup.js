@@ -1,4 +1,4 @@
-const API_URL = 'https://challengehub.sn/get_ts_file.php';
+const TS_FILE_DOWNLOAD_URL = 'https://challengehub.sn/get_ts_file.php';
 // const API_URL = 'http://localhost/slicer-tools/lookup-table-full/get_ts_file.php';
 let WEBLATE_SEARCH_URL = 'https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?q=';
 // const WEBLATE_STATISTICS_URL = 'https://hosted.weblate.org/api/components/3d-slicer/3d-slicer/statistics/?format=json';
@@ -6,25 +6,44 @@ const WEBLATE_STATISTICS_URL = 'https://challengehub.sn/get-weblate-statistics.p
 // const WEBLATE_STATISTICS_URL = 'http://localhost/slicer-tools/lookup-table-full/get-weblate-statistics.php';
 
 let contextList = [];
-let messages = [];
+const messageListByLanguage = {};
 let messageListByModule = {};
 
+let userLanguage = 'fr'; // default user language
+
+let tsFileIsDownloaded = false;
+let languagesListIsDownloaded = false;
+
 function downloadTsFile() {
+	// if the language's TS file is already downloaded, we reuse the cached one
+	if (messageListByLanguage.hasOwnProperty(userLanguage)) {
+		tsFileIsDownloaded = true;
+		return;
+	}
+
 	const xhr = new XMLHttpRequest();
 
 	xhr.onload = function () {
 		const xmlDoc = xhr.responseXML;
 		let locations = xmlDoc.getElementsByTagName('location');
 
-		let filename, message, contextName, contextIndex;
+		messageListByLanguage[userLanguage] = [];
+		let filename, message, storedMessage, contextName, contextIndex, isTranslated;
 
 		for (const location of locations) {
 			filename = location.getAttribute('filename');
 			// if (filename.indexOf('Modules/Loadable/') != -1 || filename.indexOf('Modules/Scripted/') != -1) {
 
 			message = location.parentElement;
+			translationTag = message.getElementsByTagName('translation')[0];
+
+			// ignore vanished and obsolete strings
+			if (['vanished', 'obsolete'].includes(translationTag.getAttribute('type'))) continue;
+
+			isTranslated = (!translationTag.innerHTML || translationTag.hasAttribute('type')) ? false : true;
 			contextName = message.parentElement.firstElementChild.innerHTML;
-			messageText = message.getElementsByTagName('source')[0].innerHTML
+			messageText = message.getElementsByTagName('source')[0].innerHTML;
+
 
 			contextIndex = contextList.indexOf(contextName);
 
@@ -38,13 +57,21 @@ function downloadTsFile() {
 				'line': location.getAttribute('line'),
 				'text': messageText,
 				'module': getModuleName(filename),
-				'context': contextIndex
+				'context': contextIndex,
+				'translated': {}
 			};
+			newMessage.translated[userLanguage] = isTranslated;
 
-			messages.push(newMessage);
+			messageListByLanguage[userLanguage].push(newMessage);
 
 			if (messageListByModule.hasOwnProperty(newMessage.module)) {
-				messageListByModule[newMessage.module].push(newMessage);
+				storedMessage = getMessageFromModuleList(newMessage);
+				if (storedMessage) {
+					storedMessage.translated[userLanguage] = isTranslated;
+				}
+				else {
+					messageListByModule[newMessage.module].push(newMessage);
+				}
 			}
 			else {
 				messageListByModule[newMessage.module] = [newMessage];
@@ -52,15 +79,14 @@ function downloadTsFile() {
 			// }
 		};
 
-		// console.log(contextList.length + " contexts detected\n\n");
-		// console.log(contextList);
-		// console.log('\n\n' + messages.length + " messages detected\n\n");
-		// console.log(messages);
-		udpateModuleListGui();
-		// console.log("Done");
+		// the module list is updated only at first download
+		if (!moduleField.innerHTML) {
+			udpateModuleListGui();
+		}
+		tsFileIsDownloaded = true;
 	}
 
-	xhr.open('GET', API_URL);
+	xhr.open('GET', `${TS_FILE_DOWNLOAD_URL}?lang=${userLanguage}`);
 	xhr.send();
 }
 
@@ -83,9 +109,19 @@ function getModuleName(filename) {
 	return moduleName;
 }
 
+function getMessageFromModuleList(searchedMessage) {
+	for (const message of messageListByModule[searchedMessage.module]) {
+		if (message.context == searchedMessage.context && message.text == searchedMessage.text
+			&& message.line == searchedMessage.line && message.location == searchedMessage.location) {
+			return message;
+		}
+	}
+
+	return null;
+}
+
 function udpateModuleListGui() {
-	let moduleNames = '<option value="none">Choose a module name</option>';
-	moduleNames    += '<option value="all">All modules</option>';
+	let moduleNames = `<option value="all">All modules [${messageListByLanguage[userLanguage].length}]</option>`;
 
 	const moduleList = Object.keys(messageListByModule).sort()
 
@@ -98,17 +134,12 @@ function udpateModuleListGui() {
 	searchedModuleName.innerHTML = moduleNames;
 }
 
-function onModuleFieldChanged() {
+function onModuleNameChanged() {
 	const moduleField = document.getElementById('moduleField');
 	const searchField = document.getElementById('searchField');
 
 	searchField.value = ''; // clear the search field
 	searchField.focus();
-
-	if (moduleField.value == 'all' || moduleField.value == 'none') {
-		stringTable.hidden = true;
-		return;
-	}
 
 	searchString(); // update the showed strings by making a new search
 }
@@ -119,17 +150,22 @@ function searchString() {
 	const searchedString = searchField.value.toLowerCase();
 	const moduleName = moduleField.value;
 
-	const foundMessages = [];
-	let messageList = messages;
-
-	if (moduleName == 'none') {
-		moduleField.selectedIndex = 1; // select "all module" as the choice
+	if (moduleName == 'all' && searchedString == '' && !hideTranslatedCheckbox.checked) {
+		stringTable.hidden = true;
+		foundStringBox.hidden = true;
+		return;
 	}
-	else if (moduleName != 'all') { // if a given module is chosen
+
+	const foundMessages = [];
+	// let messageList = messages;
+	let messageList = messageListByLanguage[userLanguage];
+
+	if (moduleName != 'all') { // if a given module is chosen
 		messageList = messageListByModule[moduleName]
 	}
 
 	for (const message of messageList) {
+		if (message.translated[userLanguage] && hideTranslatedCheckbox.checked) continue;
 		if (message.text.toLowerCase().indexOf(searchedString) != -1) {
 			foundMessages.push(message);
 		}
@@ -140,6 +176,9 @@ function searchString() {
 
 function showFoundStringsOnGui(foundMessages) {
 	const contentArea = document.querySelector('#stringTable tbody');
+
+	foundStringBox.hidden = false;
+	foundStringBox.innerHTML = `Found strings : ${foundMessages.length}`;
 
 	if (foundMessages.length == 0) {
 		stringTable.hidden = true;
@@ -153,9 +192,10 @@ function showFoundStringsOnGui(foundMessages) {
 		messageText = (message.text.indexOf('&') == -1) ? message.text : htmlDecode(message.text);
 
 		stringListHTML += `
-			<tr>
+			<tr${message.translated[userLanguage] ? ' class="translated"':''}>
 				<td>${message.module}</td>
 				<td>${message.text}</td>
+				<td>${message.translated[userLanguage] ? '✅' : '❌'}</td>
 				<td>${contextList[message.context]}</td>
 				<td>
 					<a href="${WEBLATE_SEARCH_URL}${encodeURIComponent(contextList[message.context] + ' "' + messageText + '"')}" target="_blank">Open on weblate</a>
@@ -181,10 +221,11 @@ function getLanguageList() {
 		const statitics = JSON.parse(xhr.responseText);
 
 		for (const result of statitics.results) {
-			languages += `<option value="${result.code}" ${result.code == 'fr' ? 'selected' : ''}>${result.name}</option>`
+			languages += `<option value="${result.code}" ${result.code == userLanguage ? 'selected' : ''}>${result.name}</option>`
 		}
 		const languageList = document.getElementById('languageList');
 		languageList.innerHTML = languages;
+		languagesListIsDownloaded = true;
 	}
 
 	xhr.open('GET', WEBLATE_STATISTICS_URL);
@@ -193,13 +234,33 @@ function getLanguageList() {
 
 let previousLanguage = 'fr';
 
-function updateTranslationUrl() {
+function onUserLanguageChanged() {
 	const languageList = document.getElementById('languageList');
-	const currentLanguage = languageList.value;
+	userLanguage = languageList.value;
 
-	WEBLATE_SEARCH_URL = WEBLATE_SEARCH_URL.replace(`/${previousLanguage}/`, `/${currentLanguage}/`);
-	previousLanguage = currentLanguage;
-	searchString();
+	// update search URL to the new language
+	WEBLATE_SEARCH_URL = WEBLATE_SEARCH_URL.replace(`/${previousLanguage}/`, `/${userLanguage}/`);
+	previousLanguage = userLanguage;
+
+	// download the language specific TS file
+	tsFileIsDownloaded = false;
+	loaderBox.hidden = false;
+	downloadTsFile();
+
+	// hide the loader and update the result table with a new search
+	hideLoader(searchString);
+}
+
+function hideLoader(callback) {
+	if (tsFileIsDownloaded && languagesListIsDownloaded) {
+		loaderBox.hidden = true;
+		if (callback) {
+			callback();
+		}
+	}
+	else {
+		setTimeout(hideLoader, 500, callback);
+	}
 }
 
 window.onload = function () {
@@ -211,4 +272,7 @@ window.onload = function () {
 	form.onsubmit = function () {
 		return false;
 	};
+
+	// Hide the loader as soon as all resources are downloaded
+	hideLoader();
 }
