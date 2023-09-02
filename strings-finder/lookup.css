@@ -1,6 +1,7 @@
 h1
 {
     text-align: center;
+    font-family: 'Poiret One', cursive;
 }
 form, fieldset {
     margin-bottom: 20px;
@@ -78,18 +79,14 @@ a:hover
 .loader {
     position: fixed;
     top: 36%;
-    left: 40%;
-    border: 26px solid #fda843;
-    border-top: 26px solid #6a96d9;
-    border-right: 26px solid green;
-    border-bottom: 26px solid red;
+    left: 45%;
+    border: 16px solid #f3f3f3;
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    background-color: lightgray;
+    border-top: 16px solid grey;
+    width: 90px;
+    height: 90px;
     animation: spin 2s linear infinite;
 }
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

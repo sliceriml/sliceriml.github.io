@@ -5,6 +5,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Slicer Strings Finder</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="lookup.css">
 	<script src="lookup.js"></script>
 </head>
@@ -21,8 +24,11 @@
 			<select id="moduleField" onchange="onModuleNameChanged()"></select>
 			<hr>
 			<label for="searchField">Search for a given string</label>
-			<input id="searchField" type="text" oninput="searchString()" placeholder="e.g. welcome">
-			<input type="checkbox" id="hideTranslatedCheckbox" onchange="searchString()" title="Hide already translated strings from the result"><label for="hideTranslatedCheckbox" title="Hide already translated strings from the result">Hide translated strings</label>
+			<input id="searchField" type="text" oninput="searchString()" placeholder="e.g. welcome or bienvenue"
+				title="Search by the english or the translated version of a string">
+			<input type="checkbox" id="hideTranslatedCheckbox" onchange="searchString()"
+				title="Hide already translated strings from the result">
+			<label for="hideTranslatedCheckbox" title="Hide already translated strings from the result">Hide translated strings</label>
 		</fieldset>
 	</form>
 	<p id="foundStringBox" hidden></p>
