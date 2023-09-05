@@ -210,8 +210,8 @@ function showFoundStringsOnGui(foundMessages) {
 			<tr${message.translated[userLanguage] ? ' class="translated"':''}>
 				<td>${message.module}</td>
 				<td>${stringList[message.text]}</td>
+				<td>${translatedStrings[userLanguage][message.text]}</td>
 				<td>${message.translated[userLanguage] ? '✅' : '❌'}</td>
-				<td>${contextList[message.context]}</td>
 				<td>
 					<a href="${WEBLATE_SEARCH_URL}${encodeURIComponent(contextList[message.context] + ' "' + messageText + '"')}" target="_blank">Open on weblate</a>
 				</td>
