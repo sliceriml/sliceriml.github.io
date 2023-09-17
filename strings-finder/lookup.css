@@ -55,12 +55,14 @@ table{
 .styled-table tbody tr.translated:hover {
     color: #009879;
 }
-a {
+td a {
     color: #009879;
+    text-decoration: none;
 }
-a:hover
+td a:hover
 {
     color: blue;
+    text-decoration: underline;
 }
 #loaderBox {
     position: fixed;
@@ -95,4 +97,12 @@ a:hover
     color: red;
     font-size: 1.3em;
     text-align: center;
+}
+td a img {
+    width: 25px;
+    height: 25px;
+}
+td a img:hover {
+    width: 30px;
+    height: 30px;
 }
