@@ -7,7 +7,7 @@
 	<title>Slicer Strings Finder</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Comic+Neue&family=Poiret+One&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="lookup.css">
 	<script src="finder.js"></script>
 </head>
@@ -40,7 +40,7 @@
 				<!-- <th>Translation</th> -->
 				<th>Translated</th>
 				<th>Weblate Translation Key</th>
-				<th>Weblate link</th>
+				<th colspan="2">Actions</th>
 			</tr>
 		</thead>
 		<tbody></tbody>
@@ -48,6 +48,33 @@
 	<div id="loaderBox">
 		<h1>Downloading resources...</h1>
 		<div class="loader"></div>
+	</div>
+	<div id="detailBox" hidden tabindex="-1">
+		<table class="styled-table">
+			<tr>
+				<th colspan="2">String Details <span title="Close this window" onclick="detailBox.hidden = true">X</span></th>
+			</tr>
+			<tr>
+				<th>Module Name</th>
+				<td>DICOM</td>
+			</tr>
+			<tr>
+				<th>Weblate Key</th>
+				<td>DICOM</td>
+			</tr>
+			<tr>
+				<th>Source</th>
+				<td>Informatics</td>
+			</tr>
+			<tr>
+				<th>Translation</th>
+				<td>Informatique</td>
+			</tr>
+			<tr>
+				<th>Location</th>
+				<td>Modules/Scripted/DICOM/DICOM.py:35</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 class Message {
 
-    constructor (location=null, line=-1, text=-1, module=null, context=-1, translated=false) {
+    constructor (index=-1, location=null, line=-1, text=-1, module=null, context=-1, translated=false) {
+        this.index = index;             // index of the message in the associated StringFinder messages list
         this.location = location;       // source file that contains the string
         this.line = line;               // line in the file where the string appears
         this.text = text;               // index of the source string in the strings list
@@ -166,6 +167,7 @@ class StringsFinder
                 }
 
                 newMessage = {
+                    'index': finder.messageListByLanguage[finder.language].length,
                     'location': filename,
                     'line': location.getAttribute('line'),
                     'text': textIndex++,
@@ -332,6 +334,20 @@ class StringsFinderManager
             }
         }
         return messageCount;
+    }
+
+    getMessageDetails(stringId) {
+        let [component, index] = stringId.split('|');
+        let finder = this.getStringsFinderInstance(component);
+        let message = finder.messageListByLanguage[this.defaultLanguage][index];
+        const finderManager = this;
+        return {
+            'module': message.module,
+            'key': finder.getContext(message.context),
+            'location': `${message.location}:${message.line}`,
+            'source': finder.getText(message.text),
+            'translation': finder.translatedStrings[finderManager.defaultLanguage][message.text]
+        };
     }
 
     getStringsFinderInstance(moduleName) {
@@ -518,6 +534,7 @@ class StringsFinderView
         this.foundStringBox.innerHTML = `Found strings : ${foundMessagesCount}`;
         contentArea.innerHTML = stringListHTML;
         this.stringTable.hidden = false;
+        this.addShowDetailEvents(contentArea);
     }
 
     generateResultItem(foundMessages) {
@@ -541,6 +558,11 @@ class StringsFinderView
                         </a>
                     </td>
                     <td>
+                        <a href="#" stringId="${finder.component}|${message.index}">
+                            <img src="detail-icon.png" title="Show details of this string.">
+                        </a>
+                    </td>
+                    <td>
                         <a href="${finder.weblateSearchUrl + searchText}" target="_blank">
                             <img src="open-in-weblate.png" title="Translate this string on Weblate.">
                         </a>
@@ -550,6 +572,29 @@ class StringsFinderView
         }
 
         return codeHtml;
+    }
+
+    showStringDetails(stringId) {
+        let details = this.finderManager.getMessageDetails(stringId)
+        this.detailBoxItems[0].innerHTML = details.module;
+        this.detailBoxItems[1].innerHTML = details.key;
+        this.detailBoxItems[2].innerHTML = details.source;
+        this.detailBoxItems[3].innerHTML = details.translation;
+        this.detailBoxItems[4].innerHTML = details.location;
+
+        this.detailBox.hidden = false;
+        this.detailBox.focus(); // so that it closes when the ESC key is typed
+    }
+
+    addShowDetailEvents(resultBoxElement) {
+        const links = resultBoxElement.querySelectorAll('a[stringId]');
+
+        for (const link of links) {
+            link.onclick = () => {
+                this.showStringDetails(link.getAttribute('stringId'));
+                return false;
+            }
+        }
     }
 }
 
@@ -562,6 +607,8 @@ window.onload = function () {
     finderView.languageList = document.getElementById('languageList');
     finderView.moduleField = document.getElementById('moduleField');
     finderView.searchField = document.getElementById('searchField');
+    finderView.detailBox = document.getElementById('detailBox');
+    finderView.detailBoxItems = finderView.detailBox.getElementsByTagName('td');
     finderView.hideTranslatedCheckbox = document.getElementById('hideTranslatedCheckbox');
 
     finderView.onPageLoad();
@@ -570,5 +617,12 @@ window.onload = function () {
     const form = document.querySelector('form');
     form.onsubmit = function () {
         return false;
+    }
+
+    // Hide detailBox when typing ESCAPE key
+    finderView.detailBox.onkeyup = function (e) {
+        if (e.key == 'Escape') {
+            this.hidden = true;
+        }
     }
 }
