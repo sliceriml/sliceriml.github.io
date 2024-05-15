@@ -54,8 +54,13 @@
                 <a href="index.html" class="nav-item nav-link active">Home</a>
                 <a href="mission.html" class="nav-item nav-link">Mission</a>
                 <a href="team.html" class="nav-item nav-link">Team</a>
-                <a href="software.html" class="nav-item nav-link">Software</a>
-                <a href="translations.html" class="nav-item nav-link">Translations</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Our work</a>
+                    <div class="dropdown-menu fade-down m-0">
+                        <a href="software.html" class="dropdown-item">Software</a>
+                        <a href="translations.html" class="dropdown-item">Translations</a>
+                    </div>
+                </div>
                 <!-- <a href="work.html" class="nav-item nav-link">Our work</a> -->
                 <!-- <a href="publication.html" class="nav-item nav-link">Publications</a> -->
                 <a href="about.html" class="nav-item nav-link">Contact Us</a>
@@ -89,12 +94,16 @@
     <!-- Events Start -->
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
-            <div class="text-center">
+            <!-- <div class="text-center">
                 <h6 class="section-title bg-white text-center text-primary px-3">Translations</h6><br><br><br>
-                <h6 class="section-title bg-white text-center text-primary px-3">Slicer in French</h6>
+                <h6 class="section-title bg-white text-center text-primary px-3">Documentation</h6>
                 <h1 class="mb-5"></h1>
+            </div> -->
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s"
+                style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                <h6 class="section-title bg-white text-center text-primary px-3">Translations</h6>
             </div>
-            <div class="container-xxl py-5">
+            <!-- <div class="container-xxl py-5">
                     <div class="row g-5">
                         <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                             <h6 class="section-title bg-white text-start text-primary pe-3">Documentation</h6>
@@ -116,10 +125,110 @@
                             </p>
                         </div>
                     </div>
-            </div>
+            </div> -->
         </div>
     </div>
 <!-- Events End -->    
+
+    <h1 align="center" class="mb-5">Documentation</h1>
+
+    <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
+                            <h5 class="mb-3">
+                                <a style="color: black;" href="https://github.com/Slicer/SlicerLanguagePacks/blob/main/Module%20translation%20lookup%20table_fr.md">French Glossary</a>
+                            </h5>
+                            <p>Translation of the Slicer Glossary to French.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-globe text-primary mb-4"></i>
+                            <h5 class="mb-3">Lookup table</h5>
+                            <p>We translate the Slicer strings lookup table into French.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-home text-primary mb-4"></i>
+                            <h5 class="mb-3">Translation guidelines</h5>
+                            <p>We translated the translation guideline into French.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-book-open text-primary mb-4"></i>
+                            <h5 class="mb-3">Developer manual</h5>
+                            <p>Translation of the Developer manual into French.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+    <br><br>
+    <h1 align="center" class="mb-5">Tutorials</h1>
+    
+    <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
+                            <h5 class="mb-3">
+                                <a style="color: black;"
+                                    href="#">Image Phenotyping</a>
+                            </h5>
+                            <p>Translation of the Image Phenotyping tutorial into French.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-globe text-primary mb-4"></i>
+                            <h5 class="mb-3">DICOM Tutorial</h5>
+                            <p>Translation of the DICOM tutorial into French.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-home text-primary mb-4"></i>
+                            <h5 class="mb-3">Slicer Visualization</h5>
+                            <p>Translation of the Slicer Visualisation tutorial into French.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-book-open text-primary mb-4"></i>
+                            <h5 class="mb-3">How To Use</h5>
+                            <p>Translation of the How to use tutorial into French.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
