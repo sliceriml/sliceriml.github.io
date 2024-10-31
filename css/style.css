@@ -337,3 +337,7 @@
     padding-right: 0;
     border-right: none;
 }
+.centered {
+    text-align: justify;
+    line-height: 1.5;
+}
